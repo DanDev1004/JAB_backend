@@ -1,0 +1,11 @@
+POST http://localhost:5000/api/user/add
+Content-Type: application/json
+
+{
+    "DNI": "12345678",
+    "nombres": "Juan Perez",
+    "email": "juan@gmail.com",
+    "password": "Hola1234*",
+    "telefono": "123456789",
+    "rol": "admin"
+}
