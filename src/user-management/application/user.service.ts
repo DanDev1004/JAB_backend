@@ -22,7 +22,7 @@ export class UserService {
         telefono: string,
         password: string,
         rol: string
-    ): Promise<User> {
+    ): Promise<UserWithoutPassword> {
 
         UserSpecificationRules.validateDNI(DNI);
         UserSpecificationRules.validateTelefono(telefono);
@@ -35,13 +35,51 @@ export class UserService {
         const user: User = new User(
             DNI, nombres, email, telefono, hashedPassword, rol
         );
-        return this._userRepository.addUser(user);
+
+         const createdUser = await this._userRepository.addUser(user);
+
+         const { password: _, ...userWithoutPassword } = createdUser;
+ 
+         return userWithoutPassword;
     }
 
     public async getUserById(id: number): Promise<UserWithoutPassword> {
         const user = await this._userRepository.getUserById(id);
 
         const { password, ...userWithoutPassword } = user;
+
+        return userWithoutPassword;
+    }
+
+    public async editUser(
+        id: number,
+        updatedData: Partial<User>
+    ): Promise<UserWithoutPassword> {
+        if (updatedData.DNI) {
+            UserSpecificationRules.validateDNI(updatedData.DNI);
+        }
+        if (updatedData.telefono) {
+            UserSpecificationRules.validateTelefono(updatedData.telefono);
+        }
+        if (updatedData.email) {
+            UserSpecificationRules.validateEmail(updatedData.email);
+        }
+
+        if (updatedData.password) {
+            UserSpecificationRules.validatePassword(updatedData.password);
+        }
+
+        if (updatedData.rol) {
+            UserSpecificationRules.validateRole(updatedData.rol);
+        }
+
+        if (updatedData.password) {
+            updatedData.password = await this._passwordHasher.hash(updatedData.password);
+        }
+
+        const updatedUser = await this._userRepository.editUser(id, updatedData);
+
+        const { password: _, ...userWithoutPassword } = updatedUser;
 
         return userWithoutPassword;
     }

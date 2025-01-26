@@ -3,10 +3,10 @@ import { IUserRepository } from "../domain/interfaces/user.interface";
 import { User } from "../domain/user";
 import { UserNotFound } from "../domain/exceptions/user-not-found.exception";
 import { UserDeleted } from "../domain/exceptions/user-deleted.exception";
-import { validateUserUniqueness } from "./validate-user-uniquess";
+import { validateUserUniqueness } from "./utils/validate-user-uniquess";
 
 export class UserRepositoryPrismaMysql implements IUserRepository {
-    public async addUser(user: User): Promise<User> {
+    async addUser(user: User): Promise<User> {
         await validateUserUniqueness(user);
 
         const newUser = await prisma.user.create({
@@ -27,14 +27,14 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         return newUser;
     }
 
-    public async getUserById(id: number): Promise<User> {
+    async getUserById(id: number): Promise<User> {
 
         const user = await prisma.user.findFirst({
             where: {
                 userId: id
             }
         });
- 
+
         if (!user) {
             throw new UserNotFound();
         }
@@ -44,6 +44,35 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         }
 
         return user;
+    }
+
+    async editUser(id: number, updatedData: Partial<User>): Promise<User> {
+
+        const existingUser = await prisma.user.findUnique({
+            where: { userId: id }
+        });
+
+        if (!existingUser) {
+            throw new UserNotFound(); 
+        }
+
+        if (existingUser.isDeleted === 1) {
+            throw new UserDeleted();
+        }
+
+        await validateUserUniqueness({...existingUser, ...updatedData}, id);
+
+        
+
+        const updatedUser = await prisma.user.update({
+            where: { userId: id },
+            data: {
+                ...updatedData,
+                updatedAt: new Date()
+            }
+        });
+
+        return updatedUser;
     }
 }
 

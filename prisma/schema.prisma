@@ -25,7 +25,7 @@ model User {
   rol       String   
   isDeleted Int      
   createdAt DateTime 
-  updatedAt DateTime 
+  updatedAt DateTime @updatedAt
 
   @@map("users")
 }
