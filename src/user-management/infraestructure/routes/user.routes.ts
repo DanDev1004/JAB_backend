@@ -14,5 +14,6 @@ const userController = new UserController(userService);
 const userRouter = express.Router();
 
 userRouter.post('/add', (req, res) => userController.addUser(req, res));
+userRouter.get('/:id', (req, res) => userController.getUserById(req, res));
 
 export default userRouter;

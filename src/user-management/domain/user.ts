@@ -25,3 +25,5 @@ export class User{
         this.updatedAt = new Date();
     }
 }
+
+export type UserWithoutPassword = Omit<User, 'password'>;

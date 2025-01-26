@@ -11,7 +11,9 @@
     "db:generate": "npx prisma generate",
     "db:migrate": "npx prisma migrate dev",
     "db:deploy": "npx prisma migrate deploy",
-    "db:push": "npx prisma db push"
+    "db:push": "npx prisma db push",
+    "db:studio": "npx prisma studio",
+    "db:seed": "npx prisma db seed --preview-feature"
   },
   "keywords": [],
   "author": "",

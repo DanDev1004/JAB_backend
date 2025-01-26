@@ -9,3 +9,6 @@ Content-Type: application/json
     "telefono": "123456789",
     "rol": "admin"
 }
+
+###
+GET http://localhost:5000/api/user/7

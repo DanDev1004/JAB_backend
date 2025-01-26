@@ -22,4 +22,17 @@ export class UserController {
             res.status(500).json({message: error.message});
         }
     }
+
+    public async getUserById(req: Request, res: Response): Promise<void>{
+        const { id } = req.params;
+
+        try {
+
+            const user = await this.userService.getUserById(Number(id));
+            res.status(200).json(user);
+
+        } catch (error: any) {
+            res.status(404).json({message: error.message});
+        }
+    }
 }
