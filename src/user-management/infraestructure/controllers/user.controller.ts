@@ -58,4 +58,13 @@ export class UserController {
             });
         }
     }
+
+    public async getAllUsers(_req: Request, res: Response): Promise<void> {
+        try {
+            const activeUsers = await this._userService.getAllUsers();
+            res.status(200).json(activeUsers);
+        } catch (error: any) {
+            res.status(500).json({ message: error.message });
+        }
+    }
 }

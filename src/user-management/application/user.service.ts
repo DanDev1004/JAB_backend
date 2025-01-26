@@ -84,4 +84,15 @@ export class UserService {
         return userWithoutPassword;
     }
 
+    public async getAllUsers(): Promise<UserWithoutPassword[]> {
+        const activeUsers = await this._userRepository.getAllUsers();
+
+        const usersWithoutPassword = activeUsers.map(user => {
+            const { password, ...userWithoutPassword } = user;
+            return userWithoutPassword;
+        });
+
+        return usersWithoutPassword;
+    }
+
 }

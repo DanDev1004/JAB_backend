@@ -2,12 +2,12 @@ POST http://localhost:5000/api/user/add
 Content-Type: application/json
 
 {
-    "DNI": "77332222",
-    "nombres": "Leo torres",
-    "email": "leo@gmail.com",
+    "DNI": "22333322",
+    "nombres": "Pepe torres",
+    "email": "pepe@gmail.com",
     "password": "Hola1234*",
-    "telefono": "999338557",
-    "rol": "user"
+    "telefono": "929534557",
+    "rol": "admin"
 }
 
 ###
@@ -22,3 +22,7 @@ Content-Type: application/json
     "telefono": "956843320",
     "email": "leo1@gmail.com"
 }
+
+###
+
+GET http://localhost:5000/api/user/

@@ -74,5 +74,16 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
 
         return updatedUser;
     }
+
+    async getAllUsers(): Promise<User[]> {
+        const activeUsers = await prisma.user.findMany({
+            where: {
+                status: true,
+                isDeleted: 0 
+            }
+        });
+
+        return activeUsers;
+    }
 }
 
