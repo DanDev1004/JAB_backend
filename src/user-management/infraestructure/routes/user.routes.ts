@@ -14,6 +14,7 @@ const userController = new UserController(userService);
 const userRouter = express.Router();
 
 userRouter.post('/add', (req, res) => userController.addUser(req, res));
+userRouter.get('/inactive', (_req, res) => userController.getAllInActiveUsers(_req, res)); 
 userRouter.get('/:id', (req, res) => userController.getUserById(req, res));
 userRouter.put('/:id', (req, res) => userController.editUser(req, res));
 userRouter.get('/', (req, res) => userController.getAllUsers(req, res)); 

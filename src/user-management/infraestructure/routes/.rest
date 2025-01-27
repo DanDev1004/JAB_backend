@@ -9,20 +9,23 @@ Content-Type: application/json
     "telefono": "929534557",
     "rol": "admin"
 }
-
 ###
-GET http://localhost:5000/api/user/4
 
+GET http://localhost:5000/api/user/1
 ###
-PUT http://localhost:5000/api/user/4
+
+PUT http://localhost:5000/api/user/1
 Content-Type: application/json
 
 {
     "DNI": "77332212",
     "telefono": "956843320",
-    "email": "leo1@gmail.com"
+    "email": "pepe1@gmail.com"
 }
-
 ###
 
 GET http://localhost:5000/api/user/
+###
+
+###
+GET http://localhost:5000/api/user/inactive

@@ -61,8 +61,17 @@ export class UserController {
 
     public async getAllUsers(_req: Request, res: Response): Promise<void> {
         try {
-            const activeUsers = await this._userService.getAllUsers();
-            res.status(200).json(activeUsers);
+            const Users = await this._userService.getAllUsers();
+            res.status(200).json(Users);
+        } catch (error: any) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    public async getAllInActiveUsers(_req: Request, res: Response): Promise<void> {
+        try {
+            const InactiveUsers = await this._userService.getAllInActiveUsers();
+            res.status(200).json(InactiveUsers);
         } catch (error: any) {
             res.status(500).json({ message: error.message });
         }

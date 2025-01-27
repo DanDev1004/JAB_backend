@@ -28,7 +28,6 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
     }
 
     async getUserById(id: number): Promise<User> {
-
         const user = await prisma.user.findFirst({
             where: {
                 userId: id
@@ -76,14 +75,25 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
     }
 
     async getAllUsers(): Promise<User[]> {
-        const activeUsers = await prisma.user.findMany({
+        const Users = await prisma.user.findMany({
             where: {
                 status: true,
                 isDeleted: 0 
             }
         });
 
-        return activeUsers;
+        return Users;
+    }
+
+    async getAllInActiveUsers(): Promise<User[]>{
+        const inativeUsers = await prisma.user.findMany({
+            where: {
+                status: false,
+                isDeleted: 0
+            }
+        });
+
+        return inativeUsers;
     }
 }
 

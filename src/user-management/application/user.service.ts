@@ -46,7 +46,7 @@ export class UserService {
     public async getUserById(id: number): Promise<UserWithoutPassword> {
         const user = await this._userRepository.getUserById(id);
 
-        const { password, ...userWithoutPassword } = user;
+        const { password: _, ...userWithoutPassword } = user;
 
         return userWithoutPassword;
     }
@@ -88,7 +88,18 @@ export class UserService {
         const activeUsers = await this._userRepository.getAllUsers();
 
         const usersWithoutPassword = activeUsers.map(user => {
-            const { password, ...userWithoutPassword } = user;
+            const { password: _, ...userWithoutPassword } = user;
+            return userWithoutPassword;
+        });
+
+        return usersWithoutPassword;
+    }
+
+    public async getAllInActiveUsers(): Promise<UserWithoutPassword[]> {
+        const inativeUsers = await this._userRepository.getAllInActiveUsers();
+
+        const usersWithoutPassword = inativeUsers.map(user => {
+            const { password: _, ...userWithoutPassword } = user;
             return userWithoutPassword;
         });
 
