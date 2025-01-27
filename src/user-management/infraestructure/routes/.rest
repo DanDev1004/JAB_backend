@@ -2,10 +2,38 @@ POST http://localhost:5000/api/user/add
 Content-Type: application/json
 
 {
-    "DNI": "12345678",
-    "nombres": "Juan Perez",
-    "email": "juan@gmail.com",
+    "DNI": "22333322",
+    "nombres": "Pepe torres",
+    "email": "pepe@gmail.com",
     "password": "Hola1234*",
-    "telefono": "123456789",
+    "telefono": "929534557",
     "rol": "admin"
 }
+###
+
+GET http://localhost:5000/api/user/1
+###
+
+PUT http://localhost:5000/api/user/1
+Content-Type: application/json
+
+{
+    "DNI": "77332212",
+    "telefono": "956843320",
+    "email": "pepe1@gmail.com"
+}
+###
+
+GET http://localhost:5000/api/user/
+###
+
+GET http://localhost:5000/api/user/inactive
+
+###
+PATCH http://localhost:5000/api/user/deactivate/1
+
+###
+PATCH http://localhost:5000/api/user/activate/1
+
+###
+PATCH http://localhost:5000/api/user/delete/1

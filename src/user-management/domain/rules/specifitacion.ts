@@ -26,7 +26,6 @@ export class StringFormatLengthSpecification implements Specification<string> {
     }
 }
 
-
 export class EmailFormatSpecification implements Specification<string> {
     isSatisfiedBy(value: string): boolean {
         const regex = new RegExp(`^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$`);
@@ -58,3 +57,5 @@ export class RoleSpecification implements Specification<string> {
         return error;
     }
 }
+
+ 
