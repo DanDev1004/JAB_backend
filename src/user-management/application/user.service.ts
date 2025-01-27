@@ -51,10 +51,7 @@ export class UserService {
         return userWithoutPassword;
     }
 
-    public async editUser(
-        id: number,
-        updatedData: Partial<User>
-    ): Promise<UserWithoutPassword> {
+    public async editUser( id: number, updatedData: Partial<User>): Promise<UserWithoutPassword> {
         if (updatedData.DNI) {
             UserSpecificationRules.validateDNI(updatedData.DNI);
         }
@@ -104,6 +101,30 @@ export class UserService {
         });
 
         return usersWithoutPassword;
+    }
+
+    public async deactivateUser(id: number): Promise<UserWithoutPassword> {
+        const user = await this._userRepository.deactivateUser(id);
+    
+        const { password: _, ...userWithoutPassword } = user;
+    
+        return userWithoutPassword;
+    }
+
+    public async activateUser(id: number): Promise<UserWithoutPassword> {
+        const user = await this._userRepository.activateUser(id);
+    
+        const { password: _, ...userWithoutPassword } = user;
+    
+        return userWithoutPassword;
+    }
+
+    public async logicalUserDeletion(id: number): Promise<UserWithoutPassword> {
+        const user = await this._userRepository.logicalUserDeletion(id);
+    
+        const { password: _, ...userWithoutPassword } = user;
+    
+        return userWithoutPassword;
     }
 
 }

@@ -76,4 +76,40 @@ export class UserController {
             res.status(500).json({ message: error.message });
         }
     }
+
+    public async deactivateUser(req: Request, res: Response): Promise<void>{
+        const { id } = req.params;
+
+        try{
+            const deactivatedUser = await this._userService.deactivateUser(Number(id));
+            res.status(200).json(deactivatedUser);
+        } catch (error: any) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    public async activateUser(req: Request, res: Response): Promise<void>{
+        const { id } = req.params;
+
+        try{
+            const activateUser = await this._userService.activateUser(Number(id));
+            res.status(200).json(activateUser);
+        } catch (error: any) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+    public async logicalUserDeletion(req: Request, res: Response): Promise<void>{
+        const { id } = req.params;
+
+        try{
+            const deletedUser = await this._userService.logicalUserDeletion(Number(id));
+            res.status(200).json(deletedUser);
+        } catch (error: any) {
+            res.status(500).json({ 
+                error: error.name,
+                message: error.message 
+            });
+        }
+    }
 }

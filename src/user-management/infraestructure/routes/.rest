@@ -27,5 +27,13 @@ Content-Type: application/json
 GET http://localhost:5000/api/user/
 ###
 
-###
 GET http://localhost:5000/api/user/inactive
+
+###
+PATCH http://localhost:5000/api/user/deactivate/1
+
+###
+PATCH http://localhost:5000/api/user/activate/1
+
+###
+PATCH http://localhost:5000/api/user/delete/1
