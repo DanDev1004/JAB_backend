@@ -112,4 +112,18 @@ export class UserController {
             });
         }
     }
+
+    public async login(req: Request, res: Response): Promise<void> {
+        const { email, password } = req.body;
+    
+        try {
+            const token = await this._userService.login(email, password);
+            res.status(200).json({ token });
+        } catch (error: any) {
+            res.status(401).json({
+                error: error.name,
+                message: error.message
+            });
+        }
+    }
 }

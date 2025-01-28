@@ -168,5 +168,24 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
     
         return deletionUser;
     }
+
+    async getUserByEmail(email: string): Promise<User> {
+        const user = await prisma.user.findFirst({
+            where: {
+                email: email
+            }
+        });
+    
+        if (!user) {
+            throw new UserNotFound();
+        }
+    
+        if (user.isDeleted === 1) {
+            throw new UserDeleted();
+        }
+    
+        return user;
+    }
+    
 }
 
