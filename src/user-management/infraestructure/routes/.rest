@@ -1,13 +1,16 @@
+@jwt_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODEwNDYzNywiZXhwIjoxNzM4MTA4MjM3fQ.OXSoSx5_MJLb7qdA5ocIwXp2umAodWYpfEV9Wb6-f_A
+
 POST http://localhost:5000/api/user/add
 Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
 
 {
-    "DNI": "22333322",
-    "nombres": "Pepe torres",
-    "email": "pepe@gmail.com",
+    "DNI": "27485964",
+    "nombres": "Valentina Rojas",
+    "email": "valentina@gmail.com",
     "password": "Hola1234*",
-    "telefono": "929534557",
-    "rol": "admin"
+    "telefono": "955778067",
+    "rol": "user"
 }
 ###
 
@@ -27,7 +30,7 @@ Content-Type: application/json
 GET http://localhost:5000/api/user/
 ###
 
-GET http://localhost:5000/api/user/inactive
+GET http://localhost:5000/api/user/inactives
 
 ###
 PATCH http://localhost:5000/api/user/deactivate/1
@@ -37,3 +40,12 @@ PATCH http://localhost:5000/api/user/activate/1
 
 ###
 PATCH http://localhost:5000/api/user/delete/1
+
+###
+POST http://localhost:5000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "pepe@gmail.com",
+    "password": "Hola1234*"
+}

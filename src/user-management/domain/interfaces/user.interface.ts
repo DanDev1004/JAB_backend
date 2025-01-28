@@ -9,4 +9,5 @@ export interface IUserRepository {
     deactivateUser(id: number): Promise<User>;
     activateUser(id: number): Promise<User>;
     logicalUserDeletion(id: number): Promise<User>;
+    getUserByEmail(email: string): Promise<User>;
 }

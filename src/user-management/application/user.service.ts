@@ -2,17 +2,22 @@ import { IUserRepository } from "../domain/interfaces/user.interface";
 import { UserSpecificationRules } from "../domain/rules/user.specification.rules";
 import { User, UserWithoutPassword } from "../domain/user";
 import { IPasswordHasher } from "../domain/interfaces/password-hasher.interface";
+import { ITokenGenerator } from "../domain/interfaces/token-generator.interface";
+
 
 export class UserService {
     private _userRepository: IUserRepository;
     private _passwordHasher: IPasswordHasher;
+    private _tokenGenerator: ITokenGenerator;
 
     constructor(
         userRepository: IUserRepository,
-        passwordHasher: IPasswordHasher
+        passwordHasher: IPasswordHasher,
+        tokenGenerator: ITokenGenerator
     ) {
         this._userRepository = userRepository;
         this._passwordHasher = passwordHasher;
+        this._tokenGenerator = tokenGenerator;
     }
 
     public async addUser(
@@ -36,11 +41,11 @@ export class UserService {
             DNI, nombres, email, telefono, hashedPassword, rol
         );
 
-         const createdUser = await this._userRepository.addUser(user);
+        const createdUser = await this._userRepository.addUser(user);
 
-         const { password: _, ...userWithoutPassword } = createdUser;
- 
-         return userWithoutPassword;
+        const { password: _, ...userWithoutPassword } = createdUser;
+
+        return userWithoutPassword;
     }
 
     public async getUserById(id: number): Promise<UserWithoutPassword> {
@@ -51,7 +56,7 @@ export class UserService {
         return userWithoutPassword;
     }
 
-    public async editUser( id: number, updatedData: Partial<User>): Promise<UserWithoutPassword> {
+    public async editUser(id: number, updatedData: Partial<User>): Promise<UserWithoutPassword> {
         if (updatedData.DNI) {
             UserSpecificationRules.validateDNI(updatedData.DNI);
         }
@@ -105,26 +110,44 @@ export class UserService {
 
     public async deactivateUser(id: number): Promise<UserWithoutPassword> {
         const user = await this._userRepository.deactivateUser(id);
-    
+
         const { password: _, ...userWithoutPassword } = user;
-    
+
         return userWithoutPassword;
     }
 
     public async activateUser(id: number): Promise<UserWithoutPassword> {
         const user = await this._userRepository.activateUser(id);
-    
+
         const { password: _, ...userWithoutPassword } = user;
-    
+
         return userWithoutPassword;
     }
 
     public async logicalUserDeletion(id: number): Promise<UserWithoutPassword> {
         const user = await this._userRepository.logicalUserDeletion(id);
-    
+
         const { password: _, ...userWithoutPassword } = user;
-    
+
         return userWithoutPassword;
+    }
+
+    public async login(email: string, password: string): Promise<string> {
+        const user = await this._userRepository.getUserByEmail(email);
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        // Verificar que la contraseña coincida
+        const isPasswordValid = await this._passwordHasher.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error('Invalid credentials');
+        }
+
+        // Generar el JWT usando la interfaz
+        const token = this._tokenGenerator.generateToken(user.userId, user.rol);
+        return token;
     }
 
 }
