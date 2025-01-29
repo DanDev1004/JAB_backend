@@ -2,13 +2,13 @@ import express from 'express';
 import { UserController } from '../controllers/user.controller';
 import { UserService } from '../../application/user.service';
 import { UserRepositoryPrismaMysql } from '../user.repository';
-import { BcryptPasswordHasher } from '../utils/bcrypt-password-hasher';
-import { JwtTokenGenerator } from '../utils/jwt-token-generator'; 
-import { verifyToken } from '../middlewares/middleware';
+import { BcryptPasswordHasher } from '../password-hasher.repository';
+import { JwtTokenGenerator } from '../token-generator.repository'; 
+import { verifyToken } from '../middlewares/verify-token';
 
 const userRepository = new UserRepositoryPrismaMysql();
 const passwordHasher = new BcryptPasswordHasher();
-const jwtTokenGenerator = new JwtTokenGenerator('your_jwt_secret');
+const jwtTokenGenerator = new JwtTokenGenerator(process.env.KEY_SECRET || '');
 
 const userService = new UserService(userRepository, passwordHasher, jwtTokenGenerator);
 

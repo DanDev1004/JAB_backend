@@ -1,4 +1,4 @@
-import { ITokenGenerator } from '../../domain/interfaces/token-generator.interface';
+import { ITokenGenerator } from '../domain/interfaces/token-generator.interface';
 import jwt from 'jsonwebtoken';
 
 export class JwtTokenGenerator implements ITokenGenerator {
