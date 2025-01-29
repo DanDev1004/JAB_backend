@@ -3,6 +3,8 @@ import { UserSpecificationRules } from "../domain/rules/user.specification.rules
 import { User, UserWithoutPassword } from "../domain/user";
 import { IPasswordHasher } from "../domain/interfaces/password-hasher.interface";
 import { ITokenGenerator } from "../domain/interfaces/token-generator.interface";
+import { UserNotFound } from "../domain/exceptions/user-not-found.exception";
+import { InvalidCredentials } from "../domain/exceptions/invalid-credentials";
 
 
 export class UserService {
@@ -136,16 +138,14 @@ export class UserService {
         const user = await this._userRepository.getUserByEmail(email);
 
         if (!user) {
-            throw new Error('User not found');
+            throw new UserNotFound();
         }
 
-        // Verificar que la contraseña coincida
         const isPasswordValid = await this._passwordHasher.compare(password, user.password);
         if (!isPasswordValid) {
-            throw new Error('Invalid credentials');
+            throw new InvalidCredentials();
         }
 
-        // Generar el JWT usando la interfaz
         const token = this._tokenGenerator.generateToken(user.userId, user.rol);
         return token;
     }

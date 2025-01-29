@@ -117,8 +117,10 @@ export class UserController {
         const { email, password } = req.body;
     
         try {
+            
             const token = await this._userService.login(email, password);
             res.status(200).json({ token });
+
         } catch (error: any) {
             res.status(401).json({
                 error: error.name,
