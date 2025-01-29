@@ -1,0 +1,58 @@
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODEyMzQ3NywiZXhwIjoxNzM4MTI3MDc3fQ.6vCVzHo3ll3fF7b7G7vfTTrV8l63b4UJZBhJdMjIXzA
+
+POST http://localhost:5000/api/user/add
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "DNI": "27485964",
+    "nombres": "Valentina Rojas",
+    "email": "valentina@gmail.com",
+    "password": "Hola1234*",
+    "telefono": "955778067",
+    "rol": "user"
+}
+###
+
+GET http://localhost:5000/api/user/3
+Authorization: Bearer {{jwt_token}}
+###
+
+PUT http://localhost:5000/api/user/3
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "DNI": "77332212",
+    "telefono": "956843320",
+    "email": "pepe@gmail.com"
+}
+###
+
+GET http://localhost:5000/api/user/
+Authorization: Bearer {{jwt_token}}
+###
+
+GET http://localhost:5000/api/user/inactives
+Authorization: Bearer {{jwt_token}}
+
+###
+PATCH http://localhost:5000/api/user/deactivate/1
+Authorization: Bearer {{jwt_token}}
+
+###
+PATCH http://localhost:5000/api/user/activate/1
+Authorization: Bearer {{jwt_token}}
+
+###
+PATCH http://localhost:5000/api/user/delete/1
+Authorization: Bearer {{jwt_token}}
+
+###
+POST http://localhost:5000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "pepe@gmail.com",
+    "password": "Hola1234*"
+}
