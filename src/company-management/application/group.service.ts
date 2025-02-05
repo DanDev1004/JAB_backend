@@ -17,17 +17,11 @@ export class GroupService {
 
     public async getGroupById(id: number): Promise<Group> {
         const group = await this._groupRepository.getGroupById(id);
-        if (!group) {
-            throw new GroupNotFound();
-        }
         return group;
     }
 
     public async editGroup(id: number, updatedData: Partial<Group>): Promise<Group> {
         const updatedGroup = await this._groupRepository.editGroup(id, updatedData);
-        if (!updatedGroup) {
-            throw new GroupNotFound();
-        }
         return updatedGroup;
     }
 
@@ -43,17 +37,11 @@ export class GroupService {
 
     public async deactivateGroup(id: number): Promise<Group> {
         const group = await this._groupRepository.deactivateGroup(id);
-        if (!group) {
-            throw new GroupNotFound();
-        }
         return group;
     }
 
     public async activateGroup(id: number): Promise<Group> {
         const group = await this._groupRepository.activateGroup(id);
-        if (!group) {
-            throw new GroupNotFound();
-        }
         return group;
     }
 
