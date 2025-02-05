@@ -1,12 +1,10 @@
 import prisma from "../../../prisma";
-import { IGroupRepository } from "../domain/interfaces/group.interface";
 import { Group } from "../domain/group";
-import { GroupNotFound } from "../domain/exceptions/not-found.exception";
-import { GroupDeleted } from "../domain/exceptions/deleted.exception";
+import { IGroupRepository } from "../domain/interfaces/group.interface";
 import { validateGroupUniqueness } from "./utils/validate-group-uniquess";
-import { GroupActive } from "../domain/exceptions/active.exception";
 
 export class GroupRepositoryPrismaMysql implements IGroupRepository {
+
     async addGroup(group: Group): Promise<Group> {
         await validateGroupUniqueness(group);
 
@@ -24,36 +22,22 @@ export class GroupRepositoryPrismaMysql implements IGroupRepository {
         return newGroup;
     }
 
-    async getGroupById(id: number): Promise<Group> {
+    async getGroupById(id: number): Promise<Group | null> {
         const group = await prisma.group.findFirst({
             where: {
                 groupId: id
             }
         });
-
-        if (!group) {
-            throw new GroupNotFound();
-        }
-
-        if (group.isDeleted === 1) {
-            throw new GroupDeleted();
-        }
-
         return group;
     }
 
-    async editGroup(id: number, updatedData: Partial<Group>): Promise<Group> {
+    async editGroup(id: number, updatedData: Partial<Group>): Promise<Group | 'NOT_FOUND' | 'DELETED'> {
         const existingGroup = await prisma.group.findUnique({
             where: { groupId: id }
         });
 
-        if (!existingGroup) {
-            throw new GroupNotFound(); 
-        }
-
-        if (existingGroup.isDeleted === 1) {
-            throw new GroupDeleted();
-        }
+        if (!existingGroup)                 return 'NOT_FOUND';
+        if (existingGroup.isDeleted === 1)  return 'DELETED';
 
         await validateGroupUniqueness({...existingGroup, ...updatedData}, id);
 
@@ -90,18 +74,13 @@ export class GroupRepositoryPrismaMysql implements IGroupRepository {
         return inactiveGroups;
     }
 
-    async deactivateGroup(id: number): Promise<Group> {
+    async deactivateGroup(id: number): Promise<Group | 'NOT_FOUND' | 'DELETED'> {
         const existingGroup = await prisma.group.findUnique({
             where: { groupId: id }
         });
     
-        if (!existingGroup) {
-            throw new GroupNotFound();
-        }
-    
-        if (existingGroup.isDeleted === 1) {
-            throw new GroupDeleted();
-        }
+        if (!existingGroup)                 return 'NOT_FOUND';
+        if (existingGroup.isDeleted === 1)  return 'DELETED';
     
         const deactivatedGroup = await prisma.group.update({
             where: { groupId: id },
@@ -114,18 +93,13 @@ export class GroupRepositoryPrismaMysql implements IGroupRepository {
         return deactivatedGroup;
     }
 
-    async activateGroup(id: number): Promise<Group> {
+    async activateGroup(id: number): Promise<Group | 'NOT_FOUND' | 'DELETED'> {
         const existingGroup = await prisma.group.findUnique({
             where: { groupId: id }
         });
     
-        if (!existingGroup) {
-            throw new GroupNotFound();
-        }
-    
-        if (existingGroup.isDeleted === 1) {
-            throw new GroupDeleted();
-        }
+        if (!existingGroup)                 return 'NOT_FOUND';
+        if (existingGroup.isDeleted === 1)  return 'DELETED';
     
         const activatedGroup = await prisma.group.update({
             where: { groupId: id },
@@ -138,18 +112,13 @@ export class GroupRepositoryPrismaMysql implements IGroupRepository {
         return activatedGroup;
     }
 
-    async logicalGroupDeletion(id: number): Promise<Group> {
+    async logicalGroupDeletion(id: number): Promise<Group | 'NOT_FOUND' | 'ACTIVE'> {
         const existingGroup = await prisma.group.findUnique({
             where: { groupId: id }
         });
     
-        if (!existingGroup) {
-            throw new GroupNotFound();
-        }
-    
-        if (existingGroup.status === true) {
-            throw new GroupActive();
-        }
+        if (!existingGroup)                 return 'NOT_FOUND';
+        if (existingGroup.status === true)  return 'ACTIVE';
     
         const deletionGroup = await prisma.group.update({
             where: { groupId: id },

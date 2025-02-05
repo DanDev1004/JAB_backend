@@ -1,25 +1,25 @@
-@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM4NzIwNDIzLCJleHAiOjE3Mzg3MjQwMjN9.0ijNSfDHjZkrvPKfdHwZwlNgrl7YXbWiuPSJnmQTCzo
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODczNTM2MCwiZXhwIjoxNzM4NzM4OTYwfQ.XFshdx-kZwk-DjDEC7CzgCKKXzRqEfbfKQPkaI_MxhI
 
 POST http://localhost:5000/api/group/add
 Content-Type: application/json
 Authorization: Bearer {{jwt_token}}
 
 {
-    "nombre": "Lomas mujeres",
+    "nombre": "Lomas",
     "color": "#FF5733"
 }
 ###
 
-GET http://localhost:5000/api/group/1
+GET http://localhost:5000/api/group/2
 Authorization: Bearer {{jwt_token}}
 ###
 
-PUT http://localhost:5000/api/group/1
+PUT http://localhost:5000/api/group/2
 Content-Type: application/json
 Authorization: Bearer {{jwt_token}}
 
 {
-    "nombre": "Lomas mujeres",
+    "nombre": "Central",
     "color": "#3366FF"
 }
 ###
@@ -32,14 +32,14 @@ GET http://localhost:5000/api/group/inactives
 Authorization: Bearer {{jwt_token}}
 ###
 
-PATCH http://localhost:5000/api/group/deactivate/1
+PATCH http://localhost:5000/api/group/deactivate/2
 Authorization: Bearer {{jwt_token}}
 ###
 
-PATCH http://localhost:5000/api/group/activate/1
+PATCH http://localhost:5000/api/group/activate/2
 Authorization: Bearer {{jwt_token}}
 ###
 
-PATCH http://localhost:5000/api/group/delete/1
+PATCH http://localhost:5000/api/group/delete/2
 Authorization: Bearer {{jwt_token}}
 ###
