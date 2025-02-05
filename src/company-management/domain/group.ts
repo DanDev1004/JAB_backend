@@ -1,5 +1,5 @@
 export class Group{
-    GroupId:            number;
+    groupId:            number;
     nombre:             string;
     color:              string;
     //===== Logical elimination and auditing: attributes =======//  
@@ -9,7 +9,7 @@ export class Group{
     updatedAt:          Date;
 
     constructor(nombre: string, color: string){
-        this.GroupId = -1;
+        this.groupId = -1;
         this.nombre = nombre;
         this.color = color;
         //===== Logical elimination and auditing: attributes =======//
