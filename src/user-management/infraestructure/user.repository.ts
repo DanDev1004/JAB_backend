@@ -1,11 +1,11 @@
 import prisma from "../../../prisma";
 import { IUserRepository } from "../domain/interfaces/user.interface";
 import { User } from "../domain/user";
-import { UserNotFound } from "../domain/exceptions/user-not-found.exception";
-import { UserDeleted } from "../domain/exceptions/user-deleted.exception";
+import { UserNotFound } from "../domain/exceptions/not-found.exception";
+import { UserDeleted } from "../domain/exceptions/deleted.exception";
 import { validateUserUniqueness } from "./utils/validate-user-uniquess";
-import { UserActive } from "../domain/exceptions/user-active.exception";
-import { UserInactive } from "../domain/exceptions/user-inactive.exception";
+import { UserActive } from "../domain/exceptions/active.exception";
+import { UserInactive } from "../domain/exceptions/inactive.exception";
 
 export class UserRepositoryPrismaMysql implements IUserRepository {
     async addUser(user: User): Promise<User> {
