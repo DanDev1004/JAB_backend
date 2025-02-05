@@ -5,6 +5,7 @@ import { UserNotFound } from "../domain/exceptions/user-not-found.exception";
 import { UserDeleted } from "../domain/exceptions/user-deleted.exception";
 import { validateUserUniqueness } from "./utils/validate-user-uniquess";
 import { UserActive } from "../domain/exceptions/user-active.exception";
+import { UserInactive } from "../domain/exceptions/user-inactive.exception";
 
 export class UserRepositoryPrismaMysql implements IUserRepository {
     async addUser(user: User): Promise<User> {
@@ -178,6 +179,10 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
     
         if (!user) {
             throw new UserNotFound();
+        }
+
+        if (user.status === false){
+            throw new UserInactive();
         }
     
         if (user.isDeleted === 1) {
