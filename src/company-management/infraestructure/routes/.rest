@@ -1,0 +1,45 @@
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM4NzIwNDIzLCJleHAiOjE3Mzg3MjQwMjN9.0ijNSfDHjZkrvPKfdHwZwlNgrl7YXbWiuPSJnmQTCzo
+
+POST http://localhost:5000/api/group/add
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "nombre": "Lomas mujeres",
+    "color": "#FF5733"
+}
+###
+
+GET http://localhost:5000/api/group/1
+Authorization: Bearer {{jwt_token}}
+###
+
+PUT http://localhost:5000/api/group/1
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "nombre": "Lomas mujeres",
+    "color": "#3366FF"
+}
+###
+
+GET http://localhost:5000/api/group/
+Authorization: Bearer {{jwt_token}}
+###
+
+GET http://localhost:5000/api/group/inactives
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/group/deactivate/1
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/group/activate/1
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/group/delete/1
+Authorization: Bearer {{jwt_token}}
+###
