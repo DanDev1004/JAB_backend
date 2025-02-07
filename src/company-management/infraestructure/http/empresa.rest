@@ -1,0 +1,47 @@
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODg5OTcwMiwiZXhwIjoxNzM4OTAzMzAyfQ.Whp4bJuIgzxpiElcE8GgvSln_g6JrjnpEih-tPjL1ig
+
+POST http://localhost:5000/api/company/add
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "nombre": "UGIL",
+    "ruc":"20645655911",
+    "precioPorKilo": 2.05
+}
+###
+
+GET http://localhost:5000/api/company/6
+Authorization: Bearer {{jwt_token}}
+###
+
+PUT http://localhost:5000/api/company/2
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+
+    "logo": "http://example.com/newlogo.png",
+    "precioPorKilo": 4.5
+}
+###
+
+GET http://localhost:5000/api/company/
+Authorization: Bearer {{jwt_token}}
+###
+
+GET http://localhost:5000/api/company/inactives
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/company/deactivate/6
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/company/activate/6
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/company/delete/6
+Authorization: Bearer {{jwt_token}}
+###

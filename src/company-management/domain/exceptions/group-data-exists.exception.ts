@@ -1,6 +1,6 @@
-export class NombreExists extends Error {
+export class NombreGroupExists extends Error {
     constructor() {
-        super("El nombre ya existe");
+        super("El nombre del grupo ya existe");
         this.name = "DataExistsException";
     }
 }

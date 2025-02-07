@@ -1,19 +1,17 @@
-export class Empresa{
+export class EmpresaGroup {
+    empresaGroupId:     number;
     empresaId:          number;
-    nombre:             string;
-    logo:               string;
-    precioKilo:         number;
+    groupId:           number | null;
     //===== Logical elimination and auditing: attributes =======//
     status:             boolean;
     isDeleted:          number;
     createdAt:          Date;
     updatedAt:          Date;
 
-    constructor(nombre: string, logo: string, precioKilo: number){
-        this.empresaId = -1;
-        this.nombre = nombre;
-        this.logo = logo;
-        this.precioKilo = precioKilo;
+    constructor(empresaId: number, groupId: number | null) {
+        this.empresaGroupId = -1;
+        this.empresaId = empresaId;
+        this.groupId = groupId ?? null;
         //===== Logical elimination and auditing: initialize =======//      
         this.status = true;
         this.isDeleted = 0;

@@ -1,6 +1,8 @@
 import express, {Application} from 'express'
 import userRouter from './src/user-management/infraestructure/routes/user.routes';
 import groupRouter from './src/company-management/infraestructure/routes/group.routes';
+import empresaRouter from './src/company-management/infraestructure/routes/empresa.routes';
+import empresaGroupRouter from './src/company-management/infraestructure/routes/empresa-group.routes';
 
 class App{
     private app: Application;
@@ -9,6 +11,8 @@ class App{
     //Paths
     private user_path:  string;
     private group_path: string;
+    private company_path: string;
+    private company_group_path: string;
 
     constructor(){
         this.app = express();
@@ -17,6 +21,8 @@ class App{
         //Paths
         this.user_path = '/api/user';
         this.group_path = '/api/group';
+        this.company_path = '/api/company';
+        this.company_group_path = '/api/company-group';
 
         this.middlewares();
         this.routes();
@@ -37,6 +43,8 @@ class App{
     routes(){
        this.app.use(this.user_path, userRouter);
        this.app.use(this.group_path, groupRouter);
+       this.app.use(this.company_path, empresaRouter);
+       this.app.use(this.company_group_path, empresaGroupRouter);
     }
 }
 

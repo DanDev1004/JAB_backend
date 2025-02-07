@@ -1,11 +1,14 @@
-import { Empresa } from "../empresa";
+import { Empresa } from "../entities/empresa";
+import { UniqueEmpresaCheck } from "../types/unique-empresa-check.types";
 
 export interface IEmpresaRepository {
-    addEmpresa(empresa: Empresa): Promise<Empresa>;
-    getEmpresaById(id: number): Promise<Empresa>;
+    empresaExists(empresa: Empresa, empresaId?: number): Promise<UniqueEmpresaCheck>;
+    
+    getEmpresaById(id: number): Promise<Empresa | null>;
+    addEmpresa(empresa: Empresa): Promise<Empresa>; 
     editEmpresa(id: number, updateData: Partial<Empresa>): Promise<Empresa>;
-    getAllEmpresas(): Promise<Empresa[]>; // Activas y no eliminadas
-    getAllInactiveEmpresas(): Promise<Empresa[]>; // Inactivas pero no eliminadas
+    getAllEmpresas(): Promise<Empresa[]>;
+    getAllInactiveEmpresas(): Promise<Empresa[]>;
     deactivateEmpresa(id: number): Promise<Empresa>;
     activateEmpresa(id: number): Promise<Empresa>;
     logicalEmpresaDeletion(id: number): Promise<Empresa>;

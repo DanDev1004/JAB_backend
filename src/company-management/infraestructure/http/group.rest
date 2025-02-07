@@ -1,16 +1,17 @@
-@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODczNTM2MCwiZXhwIjoxNzM4NzM4OTYwfQ.XFshdx-kZwk-DjDEC7CzgCKKXzRqEfbfKQPkaI_MxhI
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODg5OTcwMiwiZXhwIjoxNzM4OTAzMzAyfQ.Whp4bJuIgzxpiElcE8GgvSln_g6JrjnpEih-tPjL1ig
+
 
 POST http://localhost:5000/api/group/add
 Content-Type: application/json
 Authorization: Bearer {{jwt_token}}
 
 {
-    "nombre": "Lomas",
+    "nombre": "Central",
     "color": "#FF5733"
 }
 ###
 
-GET http://localhost:5000/api/group/2
+GET http://localhost:5000/api/group/1
 Authorization: Bearer {{jwt_token}}
 ###
 
@@ -19,8 +20,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt_token}}
 
 {
-    "nombre": "Central",
-    "color": "#3366FF"
+    "color": "#4466FF"
 }
 ###
 

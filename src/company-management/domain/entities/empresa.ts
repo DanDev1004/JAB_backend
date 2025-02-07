@@ -1,17 +1,21 @@
-export class EmpresaGroup {
-    empresaGroupId:     number;
+export class Empresa{
     empresaId:          number;
-    groupId?:           number | null;
+    nombre:             string;
+    ruc:                string | null;
+    logo:               string | null;
+    precioPorKilo:      number;
     //===== Logical elimination and auditing: attributes =======//
     status:             boolean;
     isDeleted:          number;
     createdAt:          Date;
     updatedAt:          Date;
 
-    constructor(empresaId: number, groupId: number | null) {
-        this.empresaGroupId = -1;
-        this.empresaId = empresaId;
-        this.groupId = groupId ?? null;
+    constructor(nombre: string, ruc: string, logo: string, precioKilo: number){
+        this.empresaId = -1;
+        this.nombre = nombre;
+        this.ruc = ruc ?? null;
+        this.logo =  logo ?? null;
+        this.precioPorKilo = precioKilo;
         //===== Logical elimination and auditing: initialize =======//      
         this.status = true;
         this.isDeleted = 0;

@@ -1,6 +1,6 @@
-export class UserActive extends Error {
+export class ActiveUser extends Error {
     constructor() {
         super("El usuario está activo, debe ser desactivado antes de ser eliminado");
-        this.name = "UserActiveException";
+        this.name = "ActiveUserException";
     }
 }

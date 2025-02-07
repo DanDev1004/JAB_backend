@@ -1,6 +1,6 @@
-export class UserDeleted extends Error {
+export class DeletedUser extends Error {
     constructor() {
         super("El usuario ha sido eliminado");
-        this.name = "UserDeletedException";
+        this.name = "DeletedUserException";
     }
 }

@@ -1,6 +1,6 @@
-export class UserInactive extends Error {
+export class InactiveUser extends Error {
     constructor() {
         super("El usuario se encuentra inactivo");
-        this.name = "UserInactiveException";
+        this.name = "InactiveUserException";
     }
 }

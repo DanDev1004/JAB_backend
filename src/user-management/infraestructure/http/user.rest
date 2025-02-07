@@ -1,4 +1,4 @@
-@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODEyMzQ3NywiZXhwIjoxNzM4MTI3MDc3fQ.6vCVzHo3ll3fF7b7G7vfTTrV8l63b4UJZBhJdMjIXzA
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODg4MjMwNiwiZXhwIjoxNzM4ODg1OTA2fQ.Ynk6ey_V8ePUeKWY6Qd9D38Hsh_VkTuNn74U8qfBnyA
 
 POST http://localhost:5000/api/user/add
 Content-Type: application/json
@@ -6,11 +6,11 @@ Authorization: Bearer {{jwt_token}}
 
 {
     "DNI": "27485964",
-    "nombres": "Valentina Rojas",
-    "email": "valentina@gmail.com",
+    "nombres": "Pepe Cardenas",
+    "email": "pepe@gmail.com",
     "password": "Hola1234*",
     "telefono": "955778067",
-    "rol": "user"
+    "rol": "admin"
 }
 ###
 
@@ -53,6 +53,6 @@ POST http://localhost:5000/api/user/login
 Content-Type: application/json
 
 {
-    "email": "pepe@gmail.com",
-    "password": "Hola1234*"
+    "email": "admin@example.com",
+    "password": "Admin1234*"
 }

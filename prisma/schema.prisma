@@ -27,7 +27,7 @@ model User {
   createdAt DateTime 
   updatedAt DateTime
 
-  @@map("users")
+  @@map("usuarios")
 }
 
 
@@ -42,13 +42,14 @@ model Group {
   createdAt         DateTime 
   updatedAt         DateTime
   
-  @@map("groups")
+  @@map("grupos")
 }
 
 model Empresa {
-  empresaId         Int     @id @default(autoincrement())
+  empresaId         Int      @id @default(autoincrement())
   nombre            String
-  logo              String
+  ruc               String?  
+  logo              String?  @db.Text
   precioPorKilo     Float
   empresa_Group     Empresa_Group[]
 
@@ -62,17 +63,16 @@ model Empresa {
 
 model Empresa_Group{
   empresaGroupId    Int     @id @default(autoincrement())
-  groupId           Int 
+  groupId           Int?      
   empresaId         Int
 
-  group             Group   @relation(fields: [groupId], references: [groupId])
-  empresa           Empresa @relation(fields: [empresaId], references: [empresaId])
+  group             Group?   @relation(fields: [groupId], references: [groupId])
+  empresa           Empresa  @relation(fields: [empresaId], references: [empresaId])
 
   status            Boolean  
   isDeleted         Int      
   createdAt         DateTime 
   updatedAt         DateTime
 
-  @@index([empresaId, groupId])
-  @@map("empresas_groups")
+  @@map("empresas_grupos")
 }
