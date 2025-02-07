@@ -3,7 +3,7 @@ import { UserSpecificationRules } from "../domain/rules/user.specification.rules
 import { User, UserWithoutPassword } from "../domain/user";
 import { IPasswordHasher } from "../domain/interfaces/password-hasher.interface";
 import { ITokenGenerator } from "../domain/interfaces/token-generator.interface";
-import { UserNotFound } from "../domain/exceptions/user-not-found.exception";
+import { UserNotFound } from "../domain/exceptions/not-found.exception";
 import { InvalidCredentials } from "../domain/exceptions/invalid-credentials";
 
 

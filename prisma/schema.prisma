@@ -25,7 +25,54 @@ model User {
   rol       String   
   isDeleted Int      
   createdAt DateTime 
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime
 
-  @@map("users")
+  @@map("usuarios")
+}
+
+
+model Group {
+  groupId           Int       @id @default(autoincrement())
+  nombre            String
+  color             String    
+  empresa_Group     Empresa_Group[]
+
+  status            Boolean  
+  isDeleted         Int      
+  createdAt         DateTime 
+  updatedAt         DateTime
+  
+  @@map("grupos")
+}
+
+model Empresa {
+  empresaId         Int      @id @default(autoincrement())
+  nombre            String
+  ruc               String?  
+  logo              String?  @db.Text
+  precioPorKilo     Float
+  empresa_Group     Empresa_Group[]
+
+  status            Boolean  
+  isDeleted         Int      
+  createdAt         DateTime 
+  updatedAt         DateTime
+
+  @@map("empresas")
+}
+
+model Empresa_Group{
+  empresaGroupId    Int     @id @default(autoincrement())
+  groupId           Int?      
+  empresaId         Int
+
+  group             Group?   @relation(fields: [groupId], references: [groupId])
+  empresa           Empresa  @relation(fields: [empresaId], references: [empresaId])
+
+  status            Boolean  
+  isDeleted         Int      
+  createdAt         DateTime 
+  updatedAt         DateTime
+
+  @@map("empresas_grupos")
 }

@@ -1,10 +1,11 @@
 import prisma from "../../../prisma";
 import { IUserRepository } from "../domain/interfaces/user.interface";
 import { User } from "../domain/user";
-import { UserNotFound } from "../domain/exceptions/user-not-found.exception";
-import { UserDeleted } from "../domain/exceptions/user-deleted.exception";
-import { validateUserUniqueness } from "./utils/validate-user-uniquess";
-import { UserActive } from "../domain/exceptions/user-active.exception";
+import { UserNotFound } from "../domain/exceptions/not-found.exception";
+import { DeletedUser } from "../domain/exceptions/deleted.exception";
+import { validateUserUniqueness } from "./utils/validate-user-uniqueness";
+import { ActiveUser } from "../domain/exceptions/active.exception";
+import { InactiveUser } from "../domain/exceptions/inactive.exception";
 
 export class UserRepositoryPrismaMysql implements IUserRepository {
     async addUser(user: User): Promise<User> {
@@ -40,7 +41,7 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         }
 
         if (user.isDeleted === 1) {
-            throw new UserDeleted();
+            throw new DeletedUser();
         }
 
         return user;
@@ -57,7 +58,7 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         }
 
         if (existingUser.isDeleted === 1) {
-            throw new UserDeleted();
+            throw new DeletedUser();
         }
 
         await validateUserUniqueness({...existingUser, ...updatedData}, id);
@@ -107,7 +108,7 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         }
     
         if (existingUser.isDeleted === 1) {
-            throw new UserDeleted();
+            throw new DeletedUser();
         }
     
         const deactivatedUser = await prisma.user.update({
@@ -131,7 +132,7 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         }
     
         if (existingUser.isDeleted === 1) {
-            throw new UserDeleted();
+            throw new DeletedUser();
         }
     
         const activateUser = await prisma.user.update({
@@ -155,7 +156,7 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         }
     
         if (existingUser.status === true) {
-            throw new UserActive();
+            throw new ActiveUser();
         }
     
         const deletionUser = await prisma.user.update({
@@ -179,9 +180,13 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         if (!user) {
             throw new UserNotFound();
         }
+
+        if (user.status === false){
+            throw new InactiveUser();
+        }
     
         if (user.isDeleted === 1) {
-            throw new UserDeleted();
+            throw new DeletedUser();
         }
     
         return user;

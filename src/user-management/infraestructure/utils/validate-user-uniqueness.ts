@@ -1,6 +1,6 @@
 import prisma from "../../../../prisma";
 import { User } from "../../domain/user";
-import { DniExists, EmailExists, PhoneExists } from "../../domain/exceptions/data-exists.exception";
+import { DniExists, EmailExists, PhoneExists } from "../../domain/exceptions/user-data-exists.exception";
 
 export async function validateUserUniqueness(user: User, userId?: number): Promise<void> {
     const existingUser = await prisma.user.findFirst({

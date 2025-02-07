@@ -1,0 +1,45 @@
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODg5OTcwMiwiZXhwIjoxNzM4OTAzMzAyfQ.Whp4bJuIgzxpiElcE8GgvSln_g6JrjnpEih-tPjL1ig
+
+
+POST http://localhost:5000/api/group/add
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "nombre": "Central",
+    "color": "#FF5733"
+}
+###
+
+GET http://localhost:5000/api/group/1
+Authorization: Bearer {{jwt_token}}
+###
+
+PUT http://localhost:5000/api/group/2
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "color": "#4466FF"
+}
+###
+
+GET http://localhost:5000/api/group/
+Authorization: Bearer {{jwt_token}}
+###
+
+GET http://localhost:5000/api/group/inactives
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/group/deactivate/2
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/group/activate/2
+Authorization: Bearer {{jwt_token}}
+###
+
+PATCH http://localhost:5000/api/group/delete/2
+Authorization: Bearer {{jwt_token}}
+###
