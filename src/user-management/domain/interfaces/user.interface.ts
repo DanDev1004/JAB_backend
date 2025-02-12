@@ -1,8 +1,8 @@
 import { User } from "../user";
-//import { UniqueUserCheck } from "../types/unique-user-check.types";
+import { UniqueUserCheck } from "../types/unique-user-check.types";
 
 export interface IUserRepository {
-    //userExists(user: User, empresaId?: number): Promise<UniqueUserCheck>;
+    userExists(user: User, userId?: number): Promise<UniqueUserCheck>;
 
     getUserById(id: number): Promise<User | null>;
     addUser(user: User): Promise<User>;
@@ -12,5 +12,5 @@ export interface IUserRepository {
     deactivateUser(id: number): Promise<User>;
     activateUser(id: number): Promise<User>;
     logicalUserDeletion(id: number): Promise<User>;
-    getUserByEmail(email: string): Promise<User>;
+    getUserByEmail(email: string): Promise<User | null>;
 }

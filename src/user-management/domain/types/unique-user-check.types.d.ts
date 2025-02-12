@@ -1,5 +1,5 @@
 export type UniqueUserCheck = {
-    DNI:        boolean;
-    email:      boolean;
-    telefono:   boolean;
+    DNIExists:        boolean;
+    emailExists:      boolean;
+    telefonoExists:   boolean;
 };

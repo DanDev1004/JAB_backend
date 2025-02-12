@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserService } from "../../application/user.service";
+import { UserService } from "../../application/services/user.service";
 
 export class UserController {
     private _userService: UserService;
@@ -113,19 +113,4 @@ export class UserController {
         }
     }
 
-    public async login(req: Request, res: Response): Promise<void> {
-        const { email, password } = req.body;
-    
-        try {
-            
-            const token = await this._userService.login(email, password);
-            res.status(200).json({ token });
-
-        } catch (error: any) {
-            res.status(401).json({
-                error: error.name,
-                message: error.message
-            });
-        }
-    }
 }

@@ -1,22 +1,19 @@
 import express from 'express';
 import { UserController } from '../controllers/user.controller';
-import { UserService } from '../../application/user.service';
+import { UserService } from '../../application/services/user.service';
 import { UserRepositoryPrismaMysql } from '../user.repository';
 import { BcryptPasswordHasher } from '../password-hasher.repository';
-import { JwtTokenGenerator } from '../token-generator.repository'; 
 import { verifyToken } from '../middlewares/verify-token';
 
 const userRepository = new UserRepositoryPrismaMysql();
 const passwordHasher = new BcryptPasswordHasher();
-const jwtTokenGenerator = new JwtTokenGenerator(process.env.KEY_SECRET || '');
 
-const userService = new UserService(userRepository, passwordHasher, jwtTokenGenerator);
+const userService = new UserService(userRepository, passwordHasher);
 
 const userController = new UserController(userService);
 
 const userRouter = express.Router();
 
-userRouter.post('/login', (req, res)=> userController.login(req, res));
 
 userRouter.post('/add'
     ,verifyToken(['admin'])
