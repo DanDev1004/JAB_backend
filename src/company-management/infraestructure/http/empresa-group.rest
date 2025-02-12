@@ -1,0 +1,52 @@
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODg5OTcwMiwiZXhwIjoxNzM4OTAzMzAyfQ.Whp4bJuIgzxpiElcE8GgvSln_g6JrjnpEih-tPjL1ig
+
+### Crear 
+POST http://localhost:5000/api/company-group/add
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "empresaId": 1,
+    "groupId": 1
+}
+###
+
+### Obtener por ID
+GET http://localhost:5000/api/company-group/3
+Authorization: Bearer {{jwt_token}}
+###
+
+### Editar
+PUT http://localhost:5000/api/company-group/6
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "groupId": null
+}
+###
+
+### Obtener todos 
+GET http://localhost:5000/api/company-group/
+Authorization: Bearer {{jwt_token}}
+###
+
+### Obtener inactivos
+GET http://localhost:5000/api/company-group/inactives
+Authorization: Bearer {{jwt_token}}
+###
+
+### Desactivar
+PATCH http://localhost:5000/api/company-group/deactivate/6
+Authorization: Bearer {{jwt_token}}
+###
+
+### Activar
+PATCH http://localhost:5000/api/company-group/activate/6
+Authorization: Bearer {{jwt_token}}
+###
+
+### Eliminación lógica
+PATCH http://localhost:5000/api/company-group/delete/6
+Authorization: Bearer {{jwt_token}}
+###

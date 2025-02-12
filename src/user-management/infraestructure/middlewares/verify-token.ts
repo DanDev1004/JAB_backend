@@ -24,9 +24,7 @@ export const verifyToken = (roles: string[]) => {
             const decoded: any = jwt.verify(token, process.env.KEY_SECRET || '' );
             req.user = { userId: decoded.userId, role: decoded.role }; 
 
-            const allowedRoles = roles[0].split(',');
-
-            if (!allowedRoles.includes(req.user.role)) {
+            if (!roles.includes(req.user.role)) {
                 res.status(403).json({ message: 'Permisos insuficientes' });
                 return; 
             }

@@ -10,10 +10,11 @@
     "db:init": "npx prisma init --datasource-provider",
     "db:generate": "npx prisma generate",
     "db:migrate": "npx prisma migrate dev",
-    "db:deploy": "npx prisma migrate deploy",
     "db:push": "npx prisma db push",
+    "db:status": "npx prisma migrate status",
+    "db:deploy": "npx prisma migrate deploy",
     "db:studio": "npx prisma studio",
-    "db:seed": "npx prisma db seed --preview-feature"
+    "db:seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",

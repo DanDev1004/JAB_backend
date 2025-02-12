@@ -5,8 +5,9 @@ export class User{
     email:          string;
     telefono:       string;
     password:       string;
-    status:         boolean;
     rol:            string;
+   //===== Logical elimination and auditing: attributes =======//  
+    status:         boolean;
     isDeleted:      number;
     createdAt:      Date;
     updatedAt:      Date;
@@ -18,8 +19,9 @@ export class User{
         this.email = email;
         this.telefono = telefono;
         this.password = password;
-        this.status = true;
         this.rol = rol;
+        //===== Logical elimination and auditing: attributes =======//
+        this.status = true;
         this.isDeleted = 0;
         this.createdAt = new Date();
         this.updatedAt = new Date();
