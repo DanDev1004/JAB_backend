@@ -1,6 +1,6 @@
 import express from 'express';
 import { GroupController } from '../controllers/group.controller';
-import { GroupService } from '../../application/group.service';
+import { GroupService } from '../../application/services/group.service';
 import { GroupRepositoryPrismaMysql } from '../repositories/group.repository';
 import { verifyToken } from '../../../user-management/infraestructure/middlewares/verify-token';
 

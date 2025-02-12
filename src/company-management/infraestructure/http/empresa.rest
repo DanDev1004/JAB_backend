@@ -1,4 +1,4 @@
-@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczODg5OTcwMiwiZXhwIjoxNzM4OTAzMzAyfQ.Whp4bJuIgzxpiElcE8GgvSln_g6JrjnpEih-tPjL1ig
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczOTMzNDA0OCwiZXhwIjoxNzM5MzM3NjQ4fQ.64a8wVE1iqgftJoCg3LFKA3R274hWLusmwSfxH2U9YM
 
 POST http://localhost:5000/api/company/add
 Content-Type: application/json
@@ -11,7 +11,7 @@ Authorization: Bearer {{jwt_token}}
 }
 ###
 
-GET http://localhost:5000/api/company/6
+GET http://localhost:5000/api/company/2
 Authorization: Bearer {{jwt_token}}
 ###
 
