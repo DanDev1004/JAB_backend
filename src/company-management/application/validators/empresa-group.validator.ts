@@ -4,7 +4,7 @@ import { EmpresaGroupNotFound } from "../../domain/exceptions/not-found.exceptio
 import { DeletedEmpresaGroup } from "../../domain/exceptions/deleted.exception";
 import { ActiveEmpresaGroup } from "../../domain/exceptions/active.exception";
 import { InactiveEmpresaGroup } from "../../domain/exceptions/inactive.exception";
-import { RelationExists } from "../../domain/exceptions/empresa-group-exists.exception";
+import { relationExists } from "../../domain/exceptions/empresa-group-exists.exception";
 
 export class EmpresaGroupValidator {
     static async validateEmpresaGroupExists(
@@ -45,6 +45,6 @@ export class EmpresaGroupValidator {
         groupId: number | null
     ) {
         const exists = await empresaGroupRepository.empresaGroupExists(empresaId, groupId);
-        if (exists) throw new RelationExists();
+        if (exists) throw new relationExists();
     }
 }
