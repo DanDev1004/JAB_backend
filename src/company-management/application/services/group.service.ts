@@ -1,10 +1,10 @@
-import { IGroupRepository } from "../domain/interfaces/group.interface";
-import { Group } from "../domain/entities/group";
-import { GroupNotFound } from "../domain/exceptions/not-found.exception";
-import { DeletedGroup } from "../domain/exceptions/deleted.exception";
-import { ActiveGroup } from "../domain/exceptions/active.exception";
-import { InactiveGroup } from "../domain/exceptions/inactive.exception";
-import { NombreGroupExists } from "../domain/exceptions/group-data-exists.exception";
+import { IGroupRepository } from "../../domain/interfaces/group.interface";
+import { Group } from "../../domain/entities/group";
+import { GroupNotFound } from "../../domain/exceptions/not-found.exception";
+import { DeletedGroup } from "../../domain/exceptions/deleted.exception";
+import { ActiveGroup } from "../../domain/exceptions/active.exception";
+import { InactiveGroup } from "../../domain/exceptions/inactive.exception";
+import { NombreGroupExists } from "../../domain/exceptions/group-data-exists.exception";
 
 export class GroupService {
     private _groupRepository: IGroupRepository;
@@ -27,7 +27,7 @@ export class GroupService {
         
         const validacionGrupo = await this._groupRepository.groupExists(group);
     
-        if (validacionGrupo.nombreExists) throw new NombreGroupExists();
+        if (validacionGrupo.nombreExists)   throw new NombreGroupExists();
     
         return await this._groupRepository.addGroup(group);
     }

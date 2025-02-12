@@ -1,10 +1,10 @@
-import { IEmpresaGroupRepository } from "../domain/interfaces/empresa-group.interface";
-import { EmpresaGroup } from "../domain/entities/empresa-group";
-import { EmpresaGroupNotFound } from "../domain/exceptions/not-found.exception";
-import { DeletedEmpresaGroup } from "../domain/exceptions/deleted.exception";
-import { ActiveEmpresaGroup } from "../domain/exceptions/active.exception";
-import { InactiveEmpresaGroup } from "../domain/exceptions/inactive.exception";
-import { relationExists } from "../domain/exceptions/empresa-group-exists.exception";
+import { IEmpresaGroupRepository } from "../../domain/interfaces/empresa-group.interface";
+import { EmpresaGroup } from "../../domain/entities/empresa-group";
+import { EmpresaGroupNotFound } from "../../domain/exceptions/not-found.exception";
+import { DeletedEmpresaGroup } from "../../domain/exceptions/deleted.exception";
+import { ActiveEmpresaGroup } from "../../domain/exceptions/active.exception";
+import { InactiveEmpresaGroup } from "../../domain/exceptions/inactive.exception";
+import { relationExists } from "../../domain/exceptions/empresa-group-exists.exception";
 
 export class EmpresaGroupService {
     private _empresaGroupRepository: IEmpresaGroupRepository;

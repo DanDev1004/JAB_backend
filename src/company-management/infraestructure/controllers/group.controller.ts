@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GroupService } from "../../application/group.service";
+import { GroupService } from "../../application/services/group.service";
 
 export class GroupController {
     private _groupService: GroupService;

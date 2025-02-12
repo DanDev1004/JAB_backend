@@ -5,6 +5,7 @@ import { IPasswordHasher } from "../domain/interfaces/password-hasher.interface"
 import { ITokenGenerator } from "../domain/interfaces/token-generator.interface";
 import { UserNotFound } from "../domain/exceptions/not-found.exception";
 import { InvalidCredentials } from "../domain/exceptions/invalid-credentials";
+import { DeletedUser } from "../domain/exceptions/deleted.exception";
 
 
 export class UserService {
@@ -20,6 +21,17 @@ export class UserService {
         this._userRepository = userRepository;
         this._passwordHasher = passwordHasher;
         this._tokenGenerator = tokenGenerator;
+    }
+
+    public async getUserById(id: number): Promise<UserWithoutPassword> {
+        const user = await this._userRepository.getUserById(id);
+
+        if (!user)                   throw new UserNotFound();
+        if (user.isDeleted === 1)    throw new DeletedUser();
+
+        const { password: _, ...userWithoutPassword } = user;
+
+        return userWithoutPassword;
     }
 
     public async addUser(
@@ -46,14 +58,6 @@ export class UserService {
         const createdUser = await this._userRepository.addUser(user);
 
         const { password: _, ...userWithoutPassword } = createdUser;
-
-        return userWithoutPassword;
-    }
-
-    public async getUserById(id: number): Promise<UserWithoutPassword> {
-        const user = await this._userRepository.getUserById(id);
-
-        const { password: _, ...userWithoutPassword } = user;
 
         return userWithoutPassword;
     }

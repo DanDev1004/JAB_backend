@@ -1,6 +1,6 @@
 import express from 'express';
 import { EmpresaController } from '../controllers/empresa.controller';
-import { EmpresaService } from '../../application/empresa.service';
+import { EmpresaService } from '../../application/services/empresa.service';
 import { EmpresaRepositoryPrismaMysql } from '../repositories/empresa.repository';
 import { verifyToken } from '../../../user-management/infraestructure/middlewares/verify-token';
 

@@ -29,21 +29,12 @@ export class UserRepositoryPrismaMysql implements IUserRepository {
         return newUser;
     }
 
-    async getUserById(id: number): Promise<User> {
+    async getUserById(id: number): Promise<User | null> {
         const user = await prisma.user.findFirst({
             where: {
                 userId: id
             }
         });
-
-        if (!user) {
-            throw new UserNotFound();
-        }
-
-        if (user.isDeleted === 1) {
-            throw new DeletedUser();
-        }
-
         return user;
     }
 
