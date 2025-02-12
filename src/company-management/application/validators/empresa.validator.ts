@@ -5,6 +5,7 @@ import { DeletedEmpresa } from "../../domain/exceptions/deleted.exception";
 import { InactiveEmpresa } from "../../domain/exceptions/inactive.exception";
 import { ActiveEmpresa } from "../../domain/exceptions/active.exception";
 import { NombreEmpresaExists, RucEmpresaExists } from "../../domain/exceptions/empresa-data-exists.exception";
+import { UniqueEmpresaCheck } from "../../domain/types/unique-empresa-check.types";
 
 export class EmpresaValidator {
     static async validateEmpresaExists(
@@ -23,10 +24,7 @@ export class EmpresaValidator {
         empresaRepository: IEmpresaRepository,
         id: number
     ): Promise<Empresa> {
-        const empresa = await empresaRepository.getEmpresaById(id);
-        
-        if (!empresa)                   throw new EmpresaNotFound();
-        if (empresa.isDeleted === 1)    throw new DeletedEmpresa();
+        const empresa = await this.validateEmpresaExists(empresaRepository, id);
         if (empresa.status === false)   throw new InactiveEmpresa();
 
         return empresa;
@@ -36,16 +34,13 @@ export class EmpresaValidator {
         empresaRepository: IEmpresaRepository,
         id: number
     ): Promise<Empresa> {
-        const empresa = await empresaRepository.getEmpresaById(id);
-        
-        if (!empresa)                   throw new EmpresaNotFound();
-        if (empresa.isDeleted === 1)    throw new DeletedEmpresa();
+        const empresa = await this.validateEmpresaExists(empresaRepository, id);
         if (empresa.status === true)    throw new ActiveEmpresa();
 
         return empresa;
     }
 
-    static validateEmpresaData(validacionEmpresa: { nombreExists: boolean; rucExists: boolean }) {
+    static validateEmpresaData(validacionEmpresa: UniqueEmpresaCheck) {
         if (validacionEmpresa.nombreExists)     throw new NombreEmpresaExists();
         if (validacionEmpresa.rucExists)        throw new RucEmpresaExists();
     }
